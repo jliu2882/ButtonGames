@@ -46,7 +46,7 @@ public class GameCode extends Application {
         button2.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         button3.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         button4.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
+  
         root.add(button1, 0, 0);
         root.add(button2, 2, 0);
         root.add(button3, 0, 2);
