@@ -1,5 +1,12 @@
 Button {
-    -fx-background-color:#3c7fb1;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
+    -fx-background-color: #33cc00;
+    -fx-background-radius: 0;
+    -fx-min-height:100000% ;
+    -fx-max-height:100000% ;
+}
+Button:pressed{
+    -fx-background-color: #40ff00;
+}
+#startButton{
+    -fx-background-color: Black;
 }
