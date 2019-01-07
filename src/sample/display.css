@@ -7,6 +7,3 @@ Button {
 Button:pressed{
     -fx-background-color: #40ff00;
 }
-#startButton{
-    -fx-background-color: Black;
-}
