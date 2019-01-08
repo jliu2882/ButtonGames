@@ -33,6 +33,7 @@ public class GameCode extends Application {
     private boolean gameOn;
     private int x;
     private List<Integer> sequence = new ArrayList<>();
+    private List<Integer> userSequence = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -56,24 +57,28 @@ public class GameCode extends Application {
         button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 button1.setStyle("-fx-background-color: #40ff00;");
+                userSequence.add(0);
                 waits();
             }
         });
         button2.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 button2.setStyle("-fx-background-color: #40ff00;");
+                userSequence.add(1);
                 waits();
             }
         });
         button3.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 button3.setStyle("-fx-background-color: #40ff00;");
+                userSequence.add(2);
                 waits();
             }
         });
         button4.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 button4.setStyle("-fx-background-color: #40ff00;");
+                userSequence.add(3);
                 waits();
             }
         });
@@ -121,21 +126,43 @@ public class GameCode extends Application {
 
                 gameOn = true;
                 x=1;
+
                 blink();
             }
         });
         
     }
     public void blink(){
-        int round=2;
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(200),
-                ae -> sequence()));
+        if(gameOn) {
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(200),
+                    ae -> sequence()));
             timeline.setCycleCount(x);
             timeline.play();
+            Timeline timeline2 = new Timeline(new KeyFrame(
+                    Duration.millis(200),
+                    ae -> test()));
+            timeline2.setCycleCount(1);
+            timeline.setOnFinished(e -> timeline2.play());
+        }
+    }
+    public void test(){
+        while(userSequence.size()!=sequence.size()&&sequence.size()!=0) {
+            if(userSequence.size()==sequence.size()) {
+                isUserRight();
+            }
+        }
     }
     public void isUserRight(){
-
+        if(userSequence.equals(sequence)){
+            x++;
+            sequence.clear();
+            userSequence.clear();
+            blink();
+        }
+        else{
+            gameOn=false;
+        }
     }
     public void sequence(){
         int rand = (int)(Math.random()*4);
@@ -154,13 +181,6 @@ public class GameCode extends Application {
             button4.setStyle("-fx-background-color: #40ff00;");
         }
         waits();
-
-        for(int i =0;i<sequence.size();i++) {
-            System.out.println(sequence.get(i));
-        }
-        System.out.println(" ");
-
-
     }
     //?????????????????????????
     public void waits(){
@@ -173,7 +193,7 @@ public class GameCode extends Application {
                 //?????????????????????????
                 try {
                     //?????????????????????????
-                    Thread.sleep(300);
+                    Thread.sleep(500);
                     //?????????????????????????
                 } catch (InterruptedException e) {
                     //?????????????????????????
